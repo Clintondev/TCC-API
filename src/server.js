@@ -110,7 +110,7 @@ app.post('/items', (req, res) => {
  *       404:
  *         description: Item não encontrado.
  */
-app.get('/itemdds/:id', (req, res) => {
+app.get('/items/:id', (req, res) => {
     const item = items.find(i => i.id === parseInt(req.params.id, 10));
     if (!item) {
         return res.status(404).json({ error: 'Item not found' });
@@ -118,15 +118,13 @@ app.get('/itemdds/:id', (req, res) => {
     res.json(item);
 });
 
-// Configuração do Swagger
 swaggerSetup(app);
 
-// Exporta o app para os testes
 if (require.main === module) {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
     });
 } else {
-    module.exports = app; // Exporta o app sem iniciar o servidor
+    module.exports = app; 
 }

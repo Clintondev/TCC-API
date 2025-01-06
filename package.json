@@ -1,7 +1,7 @@
 {
-  "name": "ci-cd-api-demo",
+  "name": "ci-cd-api-tcc",
   "version": "1.0.0",
-  "description": "API demo for CI/CD illustration",
+  "description": "API TCC for CI/CD illustration",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

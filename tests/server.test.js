@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const app = require('../src/server'); // Assumes server is exported for testing
+const app = require('../src/server'); 
 
 describe('API Tests', () => {
     it('should return an empty list initially', (done) => {

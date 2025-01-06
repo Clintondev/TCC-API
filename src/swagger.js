@@ -6,9 +6,9 @@ const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "CI/CD Demo API",
+            title: "CI/CD TCC API",
             version: "1.0.0",
-            description: "API de exemplo para demonstrar práticas de CI/CD com Swagger"
+            description: "API de exemplo para demonstrar práticas de CI/CD"
         },
         servers: [
             {
