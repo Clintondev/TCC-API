@@ -34,7 +34,7 @@ let items = [];
  */
 app.get('/health', (req, res) => {
     res.json({
-        status: 'ok',
+        status: 'ok S2',
         timestamp: new Date().toISOString(),
     });
 });
