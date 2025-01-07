@@ -1,3 +1,4 @@
+//src/server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const swaggerSetup = require('./swagger');
@@ -6,6 +7,37 @@ const app = express();
 app.use(bodyParser.json());
 
 let items = [];
+
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Verifica o status do servidor
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: Servidor está funcionando corretamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: Status do servidor
+ *                 timestamp:
+ *                   type: string
+ *                   description: Timestamp do momento da verificação
+ *               example:
+ *                 status: "ok"
+ *                 timestamp: "2025-01-06T12:00:00Z"
+ */
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+    });
+});
 
 /**
  * @swagger

@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  ci-cd-api-tcc:
+    container_name: ci-cd-api-tcc
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    command: npm run start
+    networks:
+      - ci-cd-api-tcc
+networks:
+  ci-cd-api-tcc:
+    external: true
