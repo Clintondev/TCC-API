@@ -59,9 +59,25 @@ jobs:
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
+        id: deploy
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ secrets.ECS_SERVICE_PROD }}
           cluster: ${{ secrets.ECS_CLUSTER_PROD }}
           wait-for-service-stability: true
+
+      - name: Rollback if deploy fails
+        if: failure()
+        run: |
+          echo "Deploy falhou. Realizando rollback..."
+          PREVIOUS_TASK_DEFINITION=$(aws ecs describe-services \
+            --cluster ${{ secrets.ECS_CLUSTER_PROD }} \
+            --services ${{ secrets.ECS_SERVICE_PROD }} \
+            --query "services[0].taskDefinition" \
+            --output text)
+          aws ecs update-service \
+            --cluster ${{ secrets.ECS_CLUSTER_PROD }} \
+            --service ${{ secrets.ECS_SERVICE_PROD }} \
+            --task-definition $PREVIOUS_TASK_DEFINITION
+          echo "Rollback concluído para task definition: $PREVIOUS_TASK_DEFINITION"
