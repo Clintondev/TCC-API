@@ -110,11 +110,11 @@ app.get('/items', (req, res) => {
  *         description: Nome do item é obrigatório.
  */
 app.post('/items', (req, res) => {
-    const { name } = req.body;
-    if (!name) {
-        return res.status(400).json({ error: 'Item name is required' });
+    const { names } = req.body;
+    if (!names) {
+        return res.status(400).json({ error: 'Item names is required' });
     }
-    const newItem = { id: items.length + 1, name };
+    const newItem = { id: items.length + 1, names };
     items.push(newItem);
     res.status(201).json(newItem);
 });
